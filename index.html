@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arif's Tools - Unfollowers & Text Analyzer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="main-header">
+            <h1>Arif's Tools</h1>
+            <div class="tab-nav">
+                <button class="tab-btn active" data-tab="unfollower">Unfollowers Checker</button>
+                <button class="tab-btn" data-tab="analyzer">Text Analyzer</button>
+            </div>
+        </header>
+
+        <main id="unfollower" class="tab-content active">
+            <div class="tool-header">
+                <h2>Instagram Unfollowers Checker</h2>
+                <p>Bandingkan daftar followers dan following Anda untuk menemukan siapa yang tidak mengikuti balik.</p>
+            </div>
+
+            <div class="file-upload-area">
+                <div class="file-input-wrapper">
+                    <label for="followers-input" class="file-label">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        <span>Pilih File Followers</span>
+                    </label>
+                    <input type="file" id="followers-input" accept=".html">
+                    <span id="followers-file-name" class="file-name-display">Belum ada file dipilih</span>
+                </div>
+                <div class="file-input-wrapper">
+                    <label for="following-input" class="file-label">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="17" x2="22" y1="8" y2="13"/><line x1="22" x2="17" y1="8" y2="3"/></svg>
+                        <span>Pilih File Following</span>
+                    </label>
+                    <input type="file" id="following-input" accept=".html">
+                    <span id="following-file-name" class="file-name-display">Belum ada file dipilih</span>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button id="reset-unfollower-btn" class="btn-secondary">Reset</button>
+                <button id="process-btn" class="btn-primary">Cek Sekarang</button>
+            </div>
+
+            <div id="loading-unfollower" class="status-indicator hidden">
+                <div class="spinner"></div> Menganalisis data...
+            </div>
+            <div id="error-unfollower" class="status-indicator error hidden"></div>
+            
+            <div id="results-unfollower" class="results-container hidden">
+                <h3>Hasil Analisis</h3>
+                <div class="result-box-wrapper">
+                    <div class="result-box">
+                        <h4 id="unfollowers-title">Unfollowers (0)</h4>
+                        <ul id="unfollowers-list"></ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <main id="analyzer" class="tab-content">
+            <div class="tool-header">
+                <h2>Advanced Text Analyzer</h2>
+                <p>Tempel atau unggah teks, lalu cari kata kunci untuk melihat frekuensi dan lokasinya.</p>
+            </div>
+            <textarea id="text-input" placeholder="Tempelkan teks Anda di sini atau pilih file di bawah..."></textarea>
+            <div class="file-input-wrapper text-analyzer-file">
+                <label for="file-input-analyzer" class="file-label">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+                    <span>Pilih File Teks</span>
+                </label>
+                <input type="file" id="file-input-analyzer" accept=".txt, .html, .md, .csv">
+                <span id="file-name-analyzer" class="file-name-display">Belum ada file dipilih</span>
+            </div>
+            <div class="search-controls">
+                <input type="text" id="search-query" placeholder="Ketik kata kunci...">
+                <div class="options">
+                    <input type="checkbox" id="case-sensitive">
+                    <label for="case-sensitive">Bedakan Huruf</label>
+                </div>
+            </div>
+            <div class="action-buttons">
+                 <button id="reset-analyzer-btn" class="btn-secondary">Reset</button>
+                <button id="analyze-btn" class="btn-primary">Analisis Teks</button>
+            </div>
+            <div id="loading-analyzer" class="status-indicator hidden">
+                <div class="spinner"></div> Menganalisis teks...
+            </div>
+            <div id="error-analyzer" class="status-indicator error hidden"></div>
+            <div id="results-analyzer" class="results-container hidden">
+                <h3>Hasil Analisis</h3>
+                <div id="results-summary" class="summary-box"></div>
+                <div class="result-box details-box">
+                    <h4>Lokasi Ditemukan</h4>
+                    <ul id="results-details"></ul>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer class="credit">
+        <p>Dibuat dengan ❤️ oleh Arif Budiman</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

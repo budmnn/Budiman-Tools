@@ -1,0 +1,508 @@
+/* Import Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* =======================================
+   1. PENGATURAN DASAR & VARIABEL WARNA
+   ======================================= */
+
+:root {
+    --green-lightest: #f0fdf4;
+    --green-light: #dcfce7;
+    --green-primary: #22c55e;
+    --green-dark: #16a34a;
+    --green-darkest: #14532d;
+    --text-primary: #1f2937;
+    --text-secondary: #4b5563;
+    --border-color: #e5e7eb;
+    --background-body: #f9fafb;
+    --background-container: #ffffff;
+    --danger-color: #ef4444;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--background-body);
+    color: var(--text-primary);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+/* =======================================
+   2. KONTAINER UTAMA & HEADER
+   ======================================= */
+
+.container {
+    width: 100%;
+    max-width: 700px;
+    background: linear-gradient(145deg, var(--background-container) 0%, #f7fdfa 100%);
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-header {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--border-color);
+    background: linear-gradient(135deg, var(--green-darkest), var(--green-dark));
+    color: white;
+    position: relative; /* Tambahan penting */
+    z-index: 1; /* Pastikan header di atas konten lain jika perlu */
+}
+
+/* Lapisan baru untuk pola ombak di belakang konten */
+.main-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M11 18.2C12.7 17.5 15.4 15.8 17 16c3 0.4 2.8 3.1 6 3 2.7-0.1 3.2-2.9 6-3 3-0.1 3 2.6 6 3 2.8 0.4 3.1-2.9 6-3 2.5-0.1 3.3 2.4 5.9 3 2.7 0.6 5.3-1.1 7.1-1.8" fill="none" stroke="%23dcfce7" stroke-width="2" stroke-linecap="round" /></svg>');
+    opacity: 0.4; /* Sedikit kurangi kontras ombak */
+    z-index: -1; /* Pindahkan lapisan ini ke belakang */
+}
+
+.main-header h1 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.75rem;
+    letter-spacing: -0.5px;
+    margin-bottom: 1.5rem;
+}
+
+.tab-nav {
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 0.75rem;
+    padding: 0.25rem;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: none;
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    /* HAPUS border-bottom dari sini */
+}
+
+.tab-btn:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
+}
+
+.tab-btn.active {
+    background-color: white;
+    color: var(--green-darkest);
+    box-shadow: var(--shadow-sm);
+}
+
+/* =======================================
+   3. KONTEN TAB & HEADER ALAT
+   ======================================= */
+
+main.tab-content {
+    display: none;
+    padding: 2rem;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+main.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.tool-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.tool-header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: var(--text-primary);
+}
+
+.tool-header p {
+    color: var(--text-secondary);
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+/* =======================================
+   4. AREA UPLOAD FILE
+   ======================================= */
+
+.file-upload-area {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.file-input-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.file-label {
+    width: 100%;
+    background-color: var(--green-lightest);
+    border: 2px dashed var(--green-primary);
+    border-radius: 0.75rem;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    color: var(--green-dark);
+}
+
+.file-label:hover {
+    background-color: var(--green-light);
+    border-color: var(--green-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.file-label svg {
+    width: 2rem;
+    height: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+.file-label span {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.file-name-display {
+    margin-top: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.file-input-wrapper.text-analyzer-file {
+    grid-column: 1 / -1;
+}
+
+/* =======================================
+   5. TOMBOL AKSI
+   ======================================= */
+
+.action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 2rem;
+    margin-top: 1rem;
+}
+
+button {
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    border: none;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--green-dark), var(--green-primary));
+    color: white;
+    box-shadow: 0 4px 14px 0 rgba(0, 118, 255, 0.39);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px 0 rgba(0, 118, 255, 0.23);
+}
+
+.btn-secondary {
+    background-color: var(--background-container);
+    color: var(--text-secondary);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background-color: #f9fafb;
+    border-color: #d1d5db;
+}
+
+/* =======================================
+   6. INDIKATOR STATUS (LOADING & ERROR)
+   ======================================= */
+
+.status-indicator {
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+    border-radius: 0.75rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.status-indicator.error {
+    background-color: #fee2e2;
+    color: var(--danger-color);
+}
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid var(--green-light);
+    border-top-color: var(--green-dark);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* =======================================
+   7. AREA HASIL
+   ======================================= */
+
+.results-container {
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.results-container h3 {
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+.result-box-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.result-box {
+    width: 100%;
+    max-width: 400px;
+    background-color: var(--background-container);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.result-box h4 {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    padding-bottom: 0.75rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.result-box ul {
+    list-style-type: none;
+    max-height: 320px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+.result-box ul::-webkit-scrollbar { width: 6px; }
+.result-box ul::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 3px; }
+.result-box ul::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+.result-box ul::-webkit-scrollbar-thumb:hover { background: #aaa; }
+
+.result-box li {
+    padding: 0.5rem 0;
+    text-align: left; /* Ubah ke kiri untuk nomor */
+    display: flex;
+    gap: 0.75rem;
+}
+
+.result-box li a {
+    color: var(--green-dark);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.result-box li a:hover {
+    color: var(--green-darkest);
+    text-decoration: underline;
+}
+
+/* =======================================
+   8. ELEMEN KHUSUS ANALISIS TEKS
+   ======================================= */
+
+textarea#text-input {
+    width: 100%;
+    min-height: 150px;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--border-color);
+    font-family: inherit;
+    font-size: 0.9rem;
+    background-color: #f9fafb;
+    margin-bottom: 1.5rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+textarea#text-input:focus {
+    outline: none;
+    border-color: var(--green-primary);
+    box-shadow: 0 0 0 3px var(--green-light);
+}
+
+.search-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.search-controls input[type="text"] {
+    flex-grow: 1;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-color);
+    font-size: 0.9rem;
+}
+
+.search-controls .options {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+}
+
+.search-controls .options label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.summary-box {
+    background-color: var(--green-lightest);
+    border: 1px solid var(--green-light);
+    color: var(--green-darkest);
+    padding: 1rem;
+    border-radius: 0.75rem;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+.summary-box strong {
+    font-weight: 700;
+}
+
+.details-box {
+    padding: 1.5rem;
+}
+
+.details-box h4 {
+    text-align: left;
+}
+
+.details-box#results-details li {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    text-align: left;
+}
+
+.details-box .highlight {
+    background-color: var(--green-light);
+    padding: 0.1rem 0.3rem;
+    border-radius: 0.25rem;
+    font-weight: 600;
+}
+
+/* =======================================
+   9. LAIN-LAIN & RESPONSIVITAS
+   ======================================= */
+
+.hidden {
+    display: none !important;
+}
+
+.credit {
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+@media (max-width: 640px) {
+    body {
+        padding: 1rem;
+    }
+    .container {
+        border-radius: 1rem;
+    }
+    .main-header, main.tab-content {
+        padding: 1.5rem;
+    }
+    .file-upload-area {
+        grid-template-columns: 1fr;
+    }
+    .action-buttons {
+        flex-direction: column-reverse;
+    }
+}
+
+@media (max-width: 640px) {
+    /* Aturan ini hanya berlaku jika lebar layar di bawah 640px */
+
+    .file-upload-area {
+        grid-template-columns: 1fr; /* Mengubah 2 kolom menjadi 1 kolom */
+    }
+
+    .action-buttons {
+        flex-direction: column-reverse; /* Menyusun tombol secara vertikal */
+    }
+}
